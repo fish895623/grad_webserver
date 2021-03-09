@@ -52,12 +52,6 @@ jobs:
         secret-name: myaksclusterdockerauth
 
     - uses: azure/k8s-deploy@v1.2
-      with:
-        namespace: myakscluster93f5
-        manifests: |
-          manifests/deployment.yml
-          manifests/service.yml
-        images: |
-          gradwebserver.azurecr.io/myakscluster:${{ github.sha }}
-        imagepullsecrets: |
-          myaksclusterdockerauth   
+      id: k8s-deploy
+      run: |
+        kubectl apply -f application/app.yml
