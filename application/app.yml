@@ -1,41 +1,39 @@
+
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-nginx-svc
-  labels:
-    app: nginx
+  name: hello-python-service
 spec:
-  type: LoadBalancer
-  ports:
-  - port: 80
   selector:
-    app: nginx
+    app: hello-python
+  ports:
+  - protocol: "TCP"
+    port: 6000
+    targetPort: 5000
+  type: LoadBalancer
+
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-nginx
-  labels:
-    app: nginx
+  name: hello-python
 spec:
-  replicas: 3
   selector:
     matchLabels:
-      app: nginx
+      app: hello-python
+  replicas: 4
   template:
     metadata:
       labels:
-        app: nginx
+        app: hello-python
     spec:
       containers:
-      - name: nginx
-        image: ghcr.io/fish895623/gradwebserver:latest
+      - name: hello-python
+        image: hello-python:latest
+        imagePullPolicy: Never
         ports:
-        - containerPort: 80
+        - containerPort: 5000
         resources:
-          requests:
-            memory: "64Mi"
-            cpu: "250m"
           limits:
-            memory: "128Mi"
-            cpu: "500m"
+            cpu: "100m"
+            memory: 512MB
