@@ -54,4 +54,4 @@ jobs:
     - uses: azure/k8s-deploy@v1.2
       id: k8s-deploy
       run: |
-        kubectl apply -f application/app.yml
+        kubectl apply --namespace grad_webserver -f application/app.yml
