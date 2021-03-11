@@ -28,7 +28,7 @@ spec:
       containers:
         - name: flask-test-app
           image: ghcr.io/fish895623/gradwebserver:latest
-          imagePullPolicy: IfNotPresent
+          # imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5000
           resources:
