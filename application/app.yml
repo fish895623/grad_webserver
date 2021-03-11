@@ -6,8 +6,7 @@ spec:
   selector:
     app: flask-test-app
   ports:
-    - protocol: "TCP"
-      port: 80
+    - port: 80
       targetPort: 5000
   type: LoadBalancer
 
@@ -20,7 +19,7 @@ spec:
   selector:
     matchLabels:
       app: flask-test-app
-  replicas: 5
+  # replicas: 5
   template:
     metadata:
       labels:
